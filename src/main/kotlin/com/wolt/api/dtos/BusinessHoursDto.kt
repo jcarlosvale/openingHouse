@@ -2,6 +2,7 @@ package com.wolt.api.dtos
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
+//null safe class
 data class BusinessHoursDto (
 
         @JsonProperty(value = "monday", required = false )
