@@ -79,7 +79,7 @@ class WoltService {
                 for (hourEvent: HourEvent in businessHours.getListOfHourEvent(dayOfWeek)) {
 
                     if (hourEvent.type.isOpenEvent()) {
-                        line = "$line ${hourEvent.getTimeFromUnixTimeStampString("hh a").toUpperCase()} - "
+                        line = "$line ${hourEvent.getTimeFromUnixTimeStampString("hh a").toUpperCase()} -"
                     } else {
                         line = "$line ${hourEvent.getTimeFromUnixTimeStampString("hh a").toUpperCase()}"
                         if (hourEvent != businessHours.getListOfHourEvent(dayOfWeek).last()) line = "$line,"
