@@ -6,7 +6,7 @@ import com.wolt.api.exceptions.ParserException
 import java.time.DayOfWeek
 
 /**
- * Verify if the working days sequence doesn't contains:
+ * Verify if the working days sequence doesn't contains in a Business Hours object:
  * - One working day starting with one close event and the previous day is not a working day OR ends with a START event.
  * - One working day not closed and the following day is not a working day OR starts with a CLOSE event
  */

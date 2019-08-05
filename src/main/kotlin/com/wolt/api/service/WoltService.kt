@@ -14,6 +14,10 @@ import java.time.DayOfWeek
 import java.time.format.TextStyle
 import java.util.*
 
+/**
+ * Main service class used to process information from Controller and uses the other components: Validator, Converter
+ * and the domain objects
+ */
 @Service
 class WoltService {
 
@@ -26,7 +30,7 @@ class WoltService {
         return readableFormat(businessHours)
     }
 
-    protected fun parseEvents(businessHours: BusinessHours) {
+    private fun parseEvents(businessHours: BusinessHours) {
 
         validate(businessHours)
 
@@ -78,10 +82,11 @@ class WoltService {
 
                 for (hourEvent: HourEvent in businessHours.getListOfHourEvent(dayOfWeek)) {
 
-                    if (hourEvent.type.isOpenEvent()) {
-                        line = "$line ${hourEvent.getTimeFromUnixTimeStampString("hh a").toUpperCase()} -"
+                    if (hourEvent.type == EventType.OPEN) {
+                        line = "$line ${hourEvent.getHourFromUnixTimeStampString()} -"
                     } else {
-                        line = "$line ${hourEvent.getTimeFromUnixTimeStampString("hh a").toUpperCase()}"
+                        line = "$line ${hourEvent.getHourFromUnixTimeStampString()}"
+
                         if (hourEvent != businessHours.getListOfHourEvent(dayOfWeek).last()) line = "$line,"
                     }
 

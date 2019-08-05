@@ -6,6 +6,9 @@ import com.wolt.api.dtos.BusinessHoursDto
 import com.wolt.api.dtos.HourEventDto
 import java.time.DayOfWeek
 
+/**
+ * Converter DTO Business Hour --> Domain Object Business Hour
+ */
 class BusinessHourConverter {
 
     fun convert(businessHoursDto: BusinessHoursDto): BusinessHours {

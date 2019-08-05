@@ -5,6 +5,9 @@ import com.wolt.api.domain.HourEvent
 import com.wolt.api.exceptions.ParserException
 import java.time.DayOfWeek
 
+/**
+ * Verifies the range of each Hour Event present in a Business Hours object
+ */
 class HourRangeValidator  : BusinessHoursValidator<BusinessHours> {
 
     override fun validate(businessHours: BusinessHours) {

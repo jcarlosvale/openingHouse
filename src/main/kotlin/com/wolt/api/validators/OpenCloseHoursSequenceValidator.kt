@@ -7,7 +7,7 @@ import com.wolt.api.exceptions.ParserException
 import java.time.DayOfWeek
 
 /**
- * Verify if one working day NOT contains two OPEN or CLOSE event type sequence
+ * Verify if one working day NOT contains two OPEN or CLOSE event type sequence in a Business Hours object
  */
 class OpenCloseHoursSequenceValidator : BusinessHoursValidator<BusinessHours> {
 
