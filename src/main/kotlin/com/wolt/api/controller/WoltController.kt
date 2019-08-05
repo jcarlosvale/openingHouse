@@ -25,16 +25,7 @@ constructor(val woltService: WoltService) {
 
     @PostMapping(consumes = [MediaType.APPLICATION_JSON])
     fun insertOpeningHours(@RequestBody(required = true) businessHoursDto: BusinessHoursDto): ResponseEntity<Any> {
-        val result: String =
-        try {
-            woltService.process(businessHoursDto)
-        } catch (e: ParserException) {
-            return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
-        }  catch (e: ParserException) {
-            return ResponseEntity("Unexpected error, contact the support and provide the used request.",
-                    HttpStatus.INTERNAL_SERVER_ERROR)
-        }
-
+        val result: String = woltService.process(businessHoursDto)
         return ResponseEntity(result, HttpStatus.ACCEPTED)
     }
 

@@ -1,5 +1,6 @@
 package com.wolt.api.dtos
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /**

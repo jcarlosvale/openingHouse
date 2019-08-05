@@ -72,13 +72,13 @@ class WoltService {
 
             val dayOfWeekDisplayName: String = dayOfWeek.getDisplayName(TextStyle.FULL, Locale.US) + ":"
 
+            var line: String = dayOfWeekDisplayName
+
             if (!businessHours.isWorkingDay(dayOfWeek)) {
 
-                result.appendln("$dayOfWeekDisplayName Closed")
+                line = "$line Closed"
 
             } else {
-
-                var line: String = dayOfWeekDisplayName
 
                 for (hourEvent: HourEvent in businessHours.getListOfHourEvent(dayOfWeek)) {
 
@@ -91,9 +91,12 @@ class WoltService {
                     }
 
                 }
-
-                result.appendln(line)
             }
+
+            if (dayOfWeek != DayOfWeek.SUNDAY)
+                result.appendln(line)
+            else
+                result.append(line)
         }
 
         print(result)
