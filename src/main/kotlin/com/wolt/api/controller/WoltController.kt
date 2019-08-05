@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType
 /**
  * Main controller to post the Open Hours
  * Returns HTTP CODE 202 - ACCEPTED in success
- * OR
+ * OR (SEE com.wolt.api.MainExceptionHandler)
  * Returns HTTP CODE 400 - In case of any parser error from request
  * Otherwise: 500 - INTERNAL ERROR
  */

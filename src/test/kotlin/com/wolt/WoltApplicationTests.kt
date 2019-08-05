@@ -1,6 +1,5 @@
 package com.wolt
 
-import com.wolt.api.dtos.BusinessHoursDto
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,13 +33,18 @@ class WoltApplicationTests {
                 "Saturday: Closed\n" +
                 "Sunday: Closed"
 
-        val businessHourDTO = BusinessHoursDto(emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList())
+        val json: String =
+                "{\n" +
+                "    \"monday\" : [],\n" +
+                "    \"tuesday\" : [],\n" +
+                "    \"wednesday\" : [],\n" +
+                "    \"thursday\" : [],\n" +
+                "    \"friday\" : [],\n" +
+                "    \"saturday\" : [],\n" +
+                "    \"sunday\" : []\n" +
+                "}"
 
-        val request: HttpEntity<BusinessHoursDto> = HttpEntity(businessHourDTO)
-
-        val baseUrl = "http://localhost:$randomServerPort$URL"
-
-        val actualResult: ResponseEntity<String> = RestTemplate().postForEntity(URI(baseUrl), request, String::class.java)
+        val actualResult: ResponseEntity<String> = executePost(json)
 
         assertEquals(HttpStatus.ACCEPTED.value(), actualResult.statusCodeValue)
 
@@ -59,14 +63,7 @@ class WoltApplicationTests {
                 "    \"sunday\" : []\n" +
                 "}"
 
-        val headers = HttpHeaders()
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-
-        val request: HttpEntity<String> = HttpEntity(json, headers)
-
-        val baseUrl = "http://localhost:$randomServerPort$URL"
-
-        RestTemplate().postForEntity(URI(baseUrl), request, String::class.java)
+        executePost(json)
     }
 
     @Test
@@ -134,14 +131,7 @@ class WoltApplicationTests {
                 "}]\n" +
                 "}"
 
-        val headers = HttpHeaders()
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-
-        val request: HttpEntity<String> = HttpEntity(json, headers)
-
-        val baseUrl = "http://localhost:$randomServerPort$URL"
-
-        val actualResult: ResponseEntity<String> = RestTemplate().postForEntity(URI(baseUrl), request, String::class.java)
+        val actualResult: ResponseEntity<String> = executePost(json)
 
         assertEquals(HttpStatus.ACCEPTED.value(), actualResult.statusCodeValue)
 
@@ -167,14 +157,7 @@ class WoltApplicationTests {
                 "    \"sunday\" : []\n" +
                 "}"
 
-        val headers = HttpHeaders()
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-
-        val request: HttpEntity<String> = HttpEntity(json, headers)
-
-        val baseUrl = "http://localhost:$randomServerPort$URL"
-
-        RestTemplate().postForEntity(URI(baseUrl), request, String::class.java)
+        executePost(json)
     }
 
     @Test(expected = HttpClientErrorException.BadRequest::class)
@@ -200,14 +183,7 @@ class WoltApplicationTests {
                         "    \"sunday\" : []\n" +
                         "}"
 
-        val headers = HttpHeaders()
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-
-        val request: HttpEntity<String> = HttpEntity(json, headers)
-
-        val baseUrl = "http://localhost:$randomServerPort$URL"
-
-        RestTemplate().postForEntity(URI(baseUrl), request, String::class.java)
+        executePost(json)
     }
 
     @Test(expected = HttpClientErrorException.BadRequest::class)
@@ -229,6 +205,10 @@ class WoltApplicationTests {
                         "    \"sunday\" : []\n" +
                         "}"
 
+        executePost(json)
+    }
+
+    private fun executePost(json: String) : ResponseEntity<String>{
         val headers = HttpHeaders()
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 
@@ -236,9 +216,8 @@ class WoltApplicationTests {
 
         val baseUrl = "http://localhost:$randomServerPort$URL"
 
-        RestTemplate().postForEntity(URI(baseUrl), request, String::class.java)
+        return RestTemplate().postForEntity(URI(baseUrl), request, String::class.java)
     }
-
 
 
 }
