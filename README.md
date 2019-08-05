@@ -19,16 +19,16 @@ outputs hours in **more human readable format**.
     - the sequence of working days, it´s not possible in a working day OPEN the restaurant and no CLOSE in the same day or
     the next day is NOT a working day. The same in case of the first EVENT in a day is a CLOSE event but the previous day is 
     NOT a working day.
-5. It´s make a sort in the event types (OPEN/CLOSE hours), for example: if the restaurant OPEN Sunday but CLOSE Monday, 
-the CLOSE event is inserted in the Sunday (and vice-versa).
+5. It´s sorted the event types (OPEN/CLOSE hours), for example: if the restaurant OPEN Sunday but CLOSE Monday, 
+the CLOSE event is inserted in the Sunday.
 6. Finally the Business Hour is printed in a **more human readable format**.
 7. It´s returned the String and one Accepted Http Code (202)
 
 NOTES: 
-1. In case of Parser Error (step 4), it´s throws an ParserException and returned a **Bad Request** Http code.
-2. In case the invalid JSON Format one **Unsupported Media Type** is returned.
+1. In case of Parser Error (step 4), it throws an ParserException and returns a **Bad Request** Http code.
+2. In case the invalid JSON Format, one **Unsupported Media Type** is returned.
 3. The exceptions are controlled by one Main Exception Handler (@ControllerAdvice)
-4. If one provided date contains minutes and seconds, it will be ignore and the hour field used.
+4. If one provided date contains minutes and seconds, only the hour field is used.
 
 ## Endpoint:
 ***POST: /wolt/insertOpeningHours***
@@ -111,6 +111,6 @@ To run tests:
 The opening / closing time is the UNIX time (1.1.1970 as a date) reference, 
 e.g. 32400 = 9 AM, 37800 = 10.30 AM, max value is 86399 = 11.59:59 PM.
 
-The problem of this approach is to fix the Date in 1.1.1970 and to use the 24 hour range of this date.
-One alternative is use a standard time pattern like the range [01-24], more easy to recognize the hour of OPEN or CLOSE 
+The problem of this approach is to establish the Date in 1.1.1970 and to use the 24 hour range of this date.
+One alternative is use a standard time like the range [00 - 24], more easy to recognize the hour of OPEN or CLOSE 
 the restaurant.
