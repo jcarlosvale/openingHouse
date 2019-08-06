@@ -114,3 +114,6 @@ e.g. 32400 = 9 AM, 37800 = 10.30 AM, max value is 86399 = 11.59:59 PM.
 The problem of this approach is to establish the Date in 1.1.1970 and to use the 24 hour range of this date.
 One alternative is use a standard time like the range [00 - 24], more easy to recognize the hour of OPEN or CLOSE 
 the restaurant.
+
+### Possible refactoring
+1. Modify the DTO to use a MAP of Days Of Week instead one field for each day (ex Monday, Tuesday,...)
